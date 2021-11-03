@@ -13,7 +13,6 @@ Fixes #24595
  src/runtime/sys_darwin.go      | 2 +-
  src/runtime/sys_darwin_386.s   | 2 +-
  src/runtime/sys_darwin_amd64.s | 2 +-
- src/runtime/sys_darwin_arm.s   | 2 +-
  src/runtime/sys_darwin_arm64.s | 2 +-
  5 files changed, 5 insertions(+), 5 deletions(-)
 
@@ -30,19 +29,6 @@ index 376f76dbc5..a0677a83f6 100644
  //go:cgo_import_dynamic libc_gettimeofday gettimeofday "/usr/lib/libSystem.B.dylib"
  //go:cgo_import_dynamic libc_sigaction sigaction "/usr/lib/libSystem.B.dylib"
  //go:cgo_import_dynamic libc_pthread_sigmask pthread_sigmask "/usr/lib/libSystem.B.dylib"
-diff --git a/src/runtime/sys_darwin_386.s b/src/runtime/sys_darwin_386.s
-index e653c54f61..5a43fcbdc1 100644
---- a/src/runtime/sys_darwin_386.s
-+++ b/src/runtime/sys_darwin_386.s
-@@ -199,7 +199,7 @@ TEXT runtime·nanotime_trampoline(SB),NOSPLIT,$0
- 	PUSHL	BP
- 	MOVL	SP, BP
- 	SUBL	$8+(machTimebaseInfo__size+15)/16*16, SP
--	CALL	libc_mach_absolute_time(SB)
-+	CALL	libc_mach_continuous_time(SB)
- 	MOVL	16+(machTimebaseInfo__size+15)/16*16(SP), CX
- 	MOVL	AX, 0(CX)
- 	MOVL	DX, 4(CX)
 diff --git a/src/runtime/sys_darwin_amd64.s b/src/runtime/sys_darwin_amd64.s
 index 87c8db8c82..f962f24339 100644
 --- a/src/runtime/sys_darwin_amd64.s
@@ -56,19 +42,6 @@ index 87c8db8c82..f962f24339 100644
  	MOVQ	AX, 0(BX)
  	MOVL	timebase<>+machTimebaseInfo_numer(SB), SI
  	MOVL	timebase<>+machTimebaseInfo_denom(SB), DI // atomic read
-diff --git a/src/runtime/sys_darwin_arm.s b/src/runtime/sys_darwin_arm.s
-index 996f8028a3..5bd34b51be 100644
---- a/src/runtime/sys_darwin_arm.s
-+++ b/src/runtime/sys_darwin_arm.s
-@@ -126,7 +126,7 @@ GLOBL timebase<>(SB),NOPTR,$(machTimebaseInfo__size)
- 
- TEXT runtime·nanotime_trampoline(SB),NOSPLIT,$0
- 	MOVW	R0, R8
--	BL	libc_mach_absolute_time(SB)
-+	BL	libc_mach_continuous_time(SB)
- 	MOVW	R0, 0(R8)
- 	MOVW	R1, 4(R8)
- 	MOVW	timebase<>+machTimebaseInfo_numer(SB), R6
 diff --git a/src/runtime/sys_darwin_arm64.s b/src/runtime/sys_darwin_arm64.s
 index ac3ca74f63..5e91540f94 100644
 --- a/src/runtime/sys_darwin_arm64.s
