@@ -17,7 +17,7 @@ GOROOT="$BUILD_ROOT/goroot/" # Not exported yet, still need the original GOROOT 
 mkdir -p "$GOROOT"
 rsync --exclude="pkg/obj/go-build" -a "$(go env GOROOT)/" "$GOROOT/"
 export GOROOT
-cat goruntime-*.diff | patch -fN -r -B -p1 -d "$GOROOT"
+#cat goruntime-*.diff | patch -fN -r -B -p1 -d "$GOROOT"
 
 BUILD_CFLAGS="-fembed-bitcode -Wno-unused-command-line-argument"
 
