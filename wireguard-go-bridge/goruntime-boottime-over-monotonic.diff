@@ -16,19 +16,6 @@ Fixes #24595
  src/runtime/sys_darwin_arm64.s | 2 +-
  5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/src/runtime/sys_darwin.go b/src/runtime/sys_darwin.go
-index 376f76dbc5..a0677a83f6 100644
---- a/src/runtime/sys_darwin.go
-+++ b/src/runtime/sys_darwin.go
-@@ -452,7 +452,7 @@ func setNonblock(fd int32) {
- //go:cgo_import_dynamic libc_usleep usleep "/usr/lib/libSystem.B.dylib"
- 
- //go:cgo_import_dynamic libc_mach_timebase_info mach_timebase_info "/usr/lib/libSystem.B.dylib"
--//go:cgo_import_dynamic libc_mach_absolute_time mach_absolute_time "/usr/lib/libSystem.B.dylib"
-+//go:cgo_import_dynamic libc_mach_continuous_time mach_continuous_time "/usr/lib/libSystem.B.dylib"
- //go:cgo_import_dynamic libc_gettimeofday gettimeofday "/usr/lib/libSystem.B.dylib"
- //go:cgo_import_dynamic libc_sigaction sigaction "/usr/lib/libSystem.B.dylib"
- //go:cgo_import_dynamic libc_pthread_sigmask pthread_sigmask "/usr/lib/libSystem.B.dylib"
 diff --git a/src/runtime/sys_darwin_amd64.s b/src/runtime/sys_darwin_amd64.s
 index 87c8db8c82..f962f24339 100644
 --- a/src/runtime/sys_darwin_amd64.s
