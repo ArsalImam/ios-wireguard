@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = "10.11"
 
     s.prepare_command = <<-CMD
-./wireguard-go-bridge/build.sh
 ./create-libwg-go-framework.sh
     CMD
 
