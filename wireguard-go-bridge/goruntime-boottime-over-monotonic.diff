@@ -20,7 +20,7 @@ diff --git a/src/runtime/sys_darwin.go b/src/runtime/sys_darwin.go
 index 376f76dbc5..a0677a83f6 100644
 --- a/src/runtime/sys_darwin.go
 +++ b/src/runtime/sys_darwin.go
-@@ -431,7 +431,7 @@ func setNonblock(fd int32) {
+@@ -452,7 +452,7 @@ func setNonblock(fd int32) {
  //go:cgo_import_dynamic libc_usleep usleep "/usr/lib/libSystem.B.dylib"
  
  //go:cgo_import_dynamic libc_mach_timebase_info mach_timebase_info "/usr/lib/libSystem.B.dylib"
